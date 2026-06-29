@@ -1,0 +1,16 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BlazingInvoices.Models
+{
+    public class SettingModel
+    {
+        [Required, MaxLength(200)]
+        public string BusinessName { get; set; }
+        [Required, EmailAddress ,MaxLength(200)]
+        public string Email { get; set; }
+        [MaxLength(15)]
+        public string? ContactNumber { get; set; }
+        [MaxLength(250)]
+        public string? Address { get; set; }
+    }
+}

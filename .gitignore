@@ -1,0 +1,30 @@
+# IDE
+.idea/
+.vs/
+.vscode/
+*.user
+*.suo
+*.sln.docstates
+.codegraph
+
+# .NET
+bin/
+obj/
+*.csproj.user
+*.dbmdl
+*.jfm
+
+# user-secrets
+appsettings.*.local.json
+
+# Tailwind / Node
+node_modules/
+package-lock.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+packages/
+*.nupkg

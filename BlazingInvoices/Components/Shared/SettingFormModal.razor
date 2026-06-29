@@ -1,0 +1,79 @@
+﻿<div class="fixed inset-0 top-0 right-0 bottom-0 left-0 z-30 grid place-items-center">
+    <div class="fixed inset-0 top-0 right-0 bottom-0 left-0 bg-black/20"></div>
+    <div class="z-30 flex w-[550px] flex-col rounded-lg bg-white p-5 shadow-2xl">
+        <div class="flex items-center justify-between">
+            <h4 class="text-3xl font-medium">Confirm?</h4>
+            <button type="button" class="cursor-pointer rounded border border-slate-200 p-1" @onclick="onClose">
+                <img src="icons/x.svg" />
+            </button>
+        </div>
+        <hr class="mt-3 mb-5 text-slate-100" />
+
+        <EditForm Model="_model">
+            <DataAnnotationsValidator />
+            <div class="space-y-3">
+                <div class="">
+                    <label class="text-xs text-slate-500">Business Name</label>
+                    <InputText @bind-Value="_model.BusinessName"
+                               class="mt-1 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm"
+                               placeholder="Enter Name" />
+                    <ValidationMessage For="() => _model.BusinessName" class="text-xs text-red-500" />
+                </div>
+
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="text-xs text-slate-500">Email</label>
+                        <InputText @bind-Value="_model.Email"
+                                     class="mt-1 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm"
+                                     placeholder="Enter Email" />
+                        <ValidationMessage For="() => _model.Email" class="text-xs text-red-500" />
+
+                    </div>
+
+                    <div>
+                        <label class="text-xs text-slate-500">Contact Number</label>
+                        <InputText @bind-Value="_model.ContactNumber"
+                                   class="mt-1 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm"
+                                   placeholder="Enter Contact Number" />
+                        <ValidationMessage For="() => _model.ContactNumber" class="text-xs text-red-500" />
+                    </div>
+                    
+                </div>
+                <div class="">
+                    <label class="text-xs text-slate-500">Address</label>
+                    <InputTextArea rows="2" @bind-Value="_model.Address"
+                                   class="mt-1 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-sm"
+                                   placeholder="Enter Address" />
+                    <ValidationMessage For="() => _model.Address" class="text-xs text-red-500" />
+                </div>
+            </div>
+        </EditForm>
+
+        <hr class="mt-5 mb-3 text-slate-100" />
+        <div class="flex items-center justify-end gap-10">
+            <button type="submit"
+                    class="cursor-pointer rounded border border-green-200 bg-green-50 px-6 py-1 text-green-600 hover:text-green-100"
+                    @onclick="HandleAsync">
+                Save
+            </button>
+
+            <button type="button"
+                    class="cursor-pointer rounded border border-red-50 bg-red-100 px-6 py-1 text-red-600 hover:text-red-100"
+                    @onclick="onClose">
+                Cancel
+            </button>
+        </div>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public EventCallback onClose { get; set; }
+
+    private SettingModel _model = new();
+
+    private async Task HandleAsync()
+    {
+        await onClose.InvokeAsync();
+    }
+}

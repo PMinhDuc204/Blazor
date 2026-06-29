@@ -1,0 +1,112 @@
+﻿@page "/clients"
+
+@inject UIService UIService
+
+<div class="flex w-full flex-col rounded-lg bg-white p-5">
+	<div class="flex items-center justify-between">
+		<h1 class="text-xl font-medium text-slate-800">Client Management</h1>
+
+		<button type="button" class="flex cursor-pointer items-center justify-center gap-2 border-green-300 bg-green-100 px-3 py-1 hover:bg-green-200" @onclick="AddNewClient">
+			<img src="icons/plus.svg" alt="" />
+			<span>Add Client</span>
+		</button>
+	</div>
+	<hr class="mt-2 mb-5 w-full text-slate-200" />
+
+	<div class="page-content">
+		@if (!_clients.Any())
+		{
+			<div class="m-5 p-5 text-center">
+				<p class="text-3xl font-bold text-slate-400">No clients added yet.</p>
+			</div>
+		}
+		else
+		{
+			<div class="">
+				<table class="min-w-full text-sm">
+					<thead>
+						<tr class="border-b border-slate-400">
+							<th class="py-2 text-left">Name</th>
+							<th class="py-2 text-left">Email</th>
+							<th class="py-2 text-left">Contact</th>
+							<th class="py-2 text-left">Remarks</th>
+							<th class="py-2 text-left">Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						@foreach (var c in _clients)
+						{
+							<tr class="border-b border-slate-300 hover:bg-slate-50">
+								<td class="py-2">@c.Name</td>
+								<td class="py-2">@c.Email</td>
+								<td class="py-2">@c.ContactNumber</td>
+								<td class="py-2">@c.Remarks</td>
+								<td class="py-2">
+									<div class="flex items-center justify-end gap-2">
+										<button type="button" class="flex cursor-pointer items-center justify-center gap-1 border border-blue-300 bg-blue-100 px-2 text-xs hover:bg-blue-200" 
+										@onclick="()=>EditClient(c)"
+										>
+											<img src="/icons/pencil-line.svg" />
+											<span>Edit</span>
+										</button>
+
+										<button type="button" class="flex cursor-pointer items-center justify-center gap-1 border border-red-300 bg-red-100 px-2 text-xs hover:bg-red-200"
+												@onclick="() => DeleteClient(c)">
+											<img src="/icons/x.svg" />
+											<span>Delete</span>
+										</button>
+									</div>
+								</td>
+							</tr>
+						}
+					</tbody>
+				</table>
+			</div>
+		}
+	</div>
+</div>
+
+@if (_showSidebar && _client is not null)
+{
+	<SaveClientForm Client="_client" OnSidebarClose="HandleSidebarClosed"/>
+}
+
+@code {
+	private IEnumerable<ClientModel> _clients = [];
+
+	protected override void OnInitialized()
+	{
+		_clients = ClientModel.GetSeedData();
+	}
+
+	private bool _showSidebar;
+	private ClientModel? _client;
+
+	private void AddNewClient()
+	{
+		_client = new();
+		_showSidebar = true;
+	}
+
+	private void EditClient(ClientModel c)
+	{
+		_client = c.Clone();
+		_showSidebar = true;
+	}
+
+	private void DeleteClient(ClientModel c)
+	{
+		var confirmationModel = ConfirmationModel.Create($"Do you really want to delete client '{c.Name}'?", () =>
+		{
+
+		});
+
+		UIService.Confirm(confirmationModel);
+	}
+
+	private void HandleSidebarClosed()
+	{
+		_client = null;
+		_showSidebar = false;
+	}
+}

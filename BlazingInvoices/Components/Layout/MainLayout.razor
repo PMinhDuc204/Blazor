@@ -1,0 +1,37 @@
+﻿@inherits LayoutComponentBase
+
+<div class="flex min-h-screen flex-col">
+    <div class="topbar sticky top-0 z-10 w-full border-b border-slate-200 bg-white">
+        <div class="flex items-center justify-between gap-3 px-4 py-3">
+            <div class="flex items-center gap-1">
+                <img src="icons/hand-coins.svg" alt="" />
+                <h2 class="text-lg font-bold">Blazing Invoices</h2>
+            </div>
+            <div class="flex items-end gap-3">
+                <div class="flex items-center gap-1">
+                    <img src="icons/user.svg" alt="" />
+                    <label class="font-medium">Abhay Prince</label>
+                </div>
+                <button type="button" class="flex cursor-pointer items-center gap-2 rounded-lg border border-rose-300 bg-rose-50 px-3 py-1 text-rose-700 hover:bg-rose-100">
+                    <img src="icons/log-out.svg" alt="" />
+                    <span>Logout</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="flex flex-1">
+        <LeftNavbar />
+        <div class="flex-1 p-5">
+            @Body
+        </div>
+    </div>
+
+</div>
+
+<ConfirmationDialog />
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
+</div>
