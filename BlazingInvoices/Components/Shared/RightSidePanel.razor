@@ -21,10 +21,13 @@
 				<img src="icons/x.svg" alt="" />
 				<span>Cancel</span>
 			</button>
-			<button type="submit" class="flex cursor-pointer items-center justify-center gap-1 rounded-lg border border-green-400 bg-green-300 px-4 py-1 hover:bg-green-400">
-				<img src="icons/check.svg" alt="" />
-				<span>Save</span>
-			</button>
+			@if (ShowSaveButton)
+			{
+				<button type="submit" class="flex cursor-pointer items-center justify-center gap-1 rounded-lg border border-green-400 bg-green-300 px-4 py-1 hover:bg-green-400">
+					<img src="icons/check.svg" alt="" />
+					<span>Save</span>
+				</button>
+			}
 		</div>
 	</div>
 </div>
@@ -38,4 +41,6 @@
 	[Parameter, EditorRequired]
 	public RenderFragment ChildContent { get; set; }
 
+	[Parameter]
+	public bool ShowSaveButton { get; set; } = true;
 }
