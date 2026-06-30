@@ -35,6 +35,7 @@
             {
                 new InvoiceModel
                 {
+                    Id = 1,
                     InvoiceNumber = "INV-2025-001",
                     ClientId = 1,
                     ClientName = "TechNava Solutions",
@@ -50,6 +51,7 @@
                 },
                 new()
                 {
+                    Id = 2,
                     InvoiceNumber = "INV-2025-002",
                     ClientId = 2,
                     ClientName = "BlueSky Digital",
@@ -64,6 +66,7 @@
                 },
                 new()
                 {
+                    Id = 3,
                     InvoiceNumber = "INV-2025-003",
                     ClientId = 1,
                     ClientName = "TechNava Solutions",
@@ -79,6 +82,7 @@
                 },
                 new()
                 {
+                    Id = 4,
                     InvoiceNumber = "INV-2025-004",
                     ClientId = 2,
                     ClientName = "BlueSky Digital",
@@ -94,6 +98,7 @@
                 },
                 new()
                 {
+                    Id = 5,
                     InvoiceNumber = "INV-2025-005",
                     ClientId = 1,
                     ClientName = "TechNava Solutions",
